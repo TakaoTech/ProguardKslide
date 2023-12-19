@@ -1,10 +1,7 @@
 import com.kslides.*
 import com.pambrose.srcref.Api.srcrefUrl
 import kotlinx.html.*
-import presentation.exclusionConfig
-import presentation.kaiserInsightPage
-import presentation.proguardintroPage
-import presentation.startPage
+import presentation.*
 
 fun main() {
 
@@ -102,6 +99,8 @@ fun main() {
 
             proguardintroPage()
             exclusionConfig()
+            shrinkingConfigPage()
+            optimizationConfigPage()
 
 
 

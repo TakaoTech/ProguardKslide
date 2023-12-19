@@ -4,6 +4,9 @@ import com.kslides.Presentation
 import com.kslides.Transition
 
 fun Presentation.exclusionConfig() {
+	//TODO Add slide Title Exclusion
+
+
 	markdownSlide {
 		slideConfig {
 			// Assign slide config defaults for all slides in this presentation
@@ -78,8 +81,7 @@ fun Presentation.exclusionConfig() {
 			
 			``` kotlin
 			-keepclasseswithmembers class * {          
-				public &lt;init&lt;(android.content.Context,
-                	android.util.AttributeSet, int); 
+				public &lt;init&lt;(android.content.Context, android.util.AttributeSet, int); 
 			}
 
 
