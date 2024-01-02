@@ -132,7 +132,7 @@ fun Presentation.exclusionConfig() {
 			-keepclassmembernames [specifica classe/i]
 			
 			Alternativa a 
-			-keepclassmembers,allowshrinkingclass
+			-keepclassmembers,allowshrinking
 			```
 			
 			``` kotlin
@@ -158,7 +158,7 @@ fun Presentation.exclusionConfig() {
 			-keepclasseswithmembernames [specifica classe/i]
 			
 			Alternativa a 
-			-keepclasseswithmembers,allowshrinkingclass  [specifica classe/i]
+			-keepclasseswithmembers,allowshrinking [specifica classe/i]
 			```
 			
 			``` kotlin
@@ -171,6 +171,31 @@ fun Presentation.exclusionConfig() {
 			Specifica la classe o le classi e i membri i cui nomi devono essere conservati se le condizioni vengono rispettate, se sono presenti dopo la fase di riduzione
 			
 			1) Dopo la fase di riduzione, tutte le classi che contengono il costruttore con parametri Context, AttributeSet e int, non verranno offuscate le classi e i membri
+			""".trimIndent()
+		}
+	}
+
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.SLIDE
+		}
+		content {
+			"""
+			```
+			-if [specifica classe/i]
+			```
+			
+			``` kotlin
+			-keepclasseswithmembernames class * {        
+			  public &lt;init&lt;(android.content.Context, android.util.AttributeSet, int); 
+			}
+
+			```
+			Notes:
+			Specifies classes and class members that must be present to activate 
+			the subsequent keep option (-keep, -keepclassmembers,...). 
+			The condition and the subsequent keep option can share wildcards and references to wildcards. For example, you can keep classes on the condition that classes with related names exist in your project, with frameworks like Dagger and Butterknife.
 			""".trimIndent()
 		}
 	}

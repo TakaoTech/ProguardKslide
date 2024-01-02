@@ -91,6 +91,10 @@ fun Presentation.optimizationConfigPage() {
 		}
 	}
 
+	//TODO assumenoexternalsideeffects
+	//TODO assumenoescapingparameters
+	//TODO assumenoexternalreturnvalues
+
 	markdownSlide {
 		slideConfig {
 			// Assign slide config defaults for all slides in this presentation
@@ -122,6 +126,9 @@ fun Presentation.optimizationConfigPage() {
 			""".trimIndent()
 		}
 	}
+
+	//TODO mergeinterfacesaggressively
+	//TODO optimizeaggressively
 
 	markdownSlide {
 		slideConfig {
