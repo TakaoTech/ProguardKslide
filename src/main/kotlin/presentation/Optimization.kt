@@ -91,9 +91,25 @@ fun Presentation.optimizationConfigPage() {
 		}
 	}
 
-	//TODO assumenoexternalsideeffects
-	//TODO assumenoescapingparameters
-	//TODO assumenoexternalreturnvalues
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.ZOOM
+		}
+		content {
+			"""
+				```
+				-assumenoexternalsideeffects [specifica classe]
+				-assumenoescapingparameters [specifica classe]
+				-assumenoexternalreturnvalues [specifica classe]
+				```
+		
+				Notes:
+				Usare con cautela, potrebbe rompere il codice.
+
+			""".trimIndent()
+		}
+	}
 
 	markdownSlide {
 		slideConfig {
@@ -127,8 +143,46 @@ fun Presentation.optimizationConfigPage() {
 		}
 	}
 
-	//TODO mergeinterfacesaggressively
-	//TODO optimizeaggressively
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.ZOOM
+		}
+		content {
+			"""
+				```
+				-mergeinterfacesaggressively
+				```
+		
+				Notes:
+				Specifica che le interfacce possono essere unite, anche se le relative classi 
+				di implementazione non implementano tutti i metodi di interfaccia. 
+				Ciò può ridurre la dimensione dell'output riducendo il numero totale di classi. 
+				Si noti che le specifiche di compatibilità binaria di Java consentono tali costrutti.
+				 l'impostazione di questa opzione può ridurre le prestazioni del codice elaborato su alcune JVM, 
+				 poiché la compilazione just-in-time avanzata tende a privilegiare più interfacce con meno classi di implementazione.
+				
+			""".trimIndent()
+		}
+	}
+
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.ZOOM
+		}
+		content {
+			"""
+				```
+				-optimizeaggressively
+				```
+		
+				Notes:
+				
+			""".trimIndent()
+		}
+	}
+
 
 	markdownSlide {
 		slideConfig {

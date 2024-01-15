@@ -102,6 +102,8 @@ fun main() {
             shrinkingConfigPage()
             optimizationConfigPage()
 
+            //TODO DIFFERENCE PROGUARD - R8
+
 
 
             markdownSlide {
