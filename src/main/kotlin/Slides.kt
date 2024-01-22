@@ -102,6 +102,8 @@ fun main() {
             shrinkingConfigPage()
             optimizationConfigPage()
 
+			proguardR8Difference()
+
             //TODO DIFFERENCE PROGUARD - R8
 
 

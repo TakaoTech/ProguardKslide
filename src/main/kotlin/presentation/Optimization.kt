@@ -125,7 +125,7 @@ fun Presentation.optimizationConfigPage() {
 					static int count return 0..2147483647;
 				}
 				
-				if (count/* [0..2147483647] */ < 0) {  
+				if (count/* [0..2147483647] */ &lt; 0) {  
 					throw new IllegalStateException();
 				}
 				
