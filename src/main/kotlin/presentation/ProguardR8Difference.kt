@@ -191,4 +191,32 @@ fun Presentation.proguardR8Difference() {
 			"""
 		}
 	}
+
+	verticalSlides {
+		markdownSlide {
+			slideConfig {
+				// Assign slide config defaults for all slides in this presentation
+				transition = Transition.SLIDE
+			}
+			content {
+				"""
+				Differenza peso tra Proguard e R8
+				![Nothing](https://media1.tenor.com/m/dG_tr_lmYHkAAAAC/looking-around.gif)
+				""".trimIndent()
+			}
+		}
+
+		markdownSlide {
+			slideConfig {
+			}
+			content {
+				"""
+					OK va bene ci ho provato, ma hanno reso quasi impossibile tornare a proguard su AGP 7,
+					e AGP8 è fuori supporto da Guardsquare per mancanza di interesse.
+					
+					[AGP8 Nope](https://github.com/Guardsquare/proguard/issues/280)
+				""".trimIndent()
+			}
+		}
+	}
 }
