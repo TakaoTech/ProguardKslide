@@ -9,7 +9,7 @@ fun Presentation.proguardTips() {
 		markdownSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
-				transition = Transition.CONCAVE
+				transition = Transition.SLIDE
 			}
 			content {
 				"""
@@ -22,7 +22,7 @@ fun Presentation.proguardTips() {
 		markdownSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
-				transition = Transition.CONCAVE
+				transition = Transition.SLIDE
 
 			}
 			content {
@@ -37,7 +37,7 @@ fun Presentation.proguardTips() {
 		markdownSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
-				transition = Transition.CONCAVE
+				transition = Transition.SLIDE
 			}
 			content {
 				"""
@@ -69,7 +69,7 @@ fun Presentation.proguardTips() {
 		dslSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
-				transition = Transition.CONCAVE
+				transition = Transition.SLIDE
 
 			}
 			content {
@@ -80,7 +80,7 @@ fun Presentation.proguardTips() {
 		markdownSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
-				transition = Transition.CONCAVE
+				transition = Transition.SLIDE
 			}
 			content {
 				"""
@@ -95,7 +95,7 @@ fun Presentation.proguardTips() {
 		markdownSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
-				transition = Transition.CONCAVE
+				transition = Transition.SLIDE
 			}
 			content {
 				"""

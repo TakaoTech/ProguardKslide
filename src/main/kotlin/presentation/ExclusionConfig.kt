@@ -4,7 +4,17 @@ import com.kslides.Presentation
 import com.kslides.Transition
 
 fun Presentation.exclusionConfig() {
-	//TODO Add slide Title Exclusion
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.SLIDE
+		}
+		content {
+			"""
+				# Keep Configuration
+			""".trimIndent()
+		}
+	}
 
 
 	markdownSlide {

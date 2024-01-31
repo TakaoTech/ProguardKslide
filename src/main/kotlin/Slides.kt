@@ -1,6 +1,5 @@
 import com.kslides.PresentationTheme
 import com.kslides.Speed
-import com.kslides.Transition
 import com.kslides.kslides
 import com.pambrose.srcref.Api.srcrefUrl
 import presentation.*
@@ -31,34 +30,13 @@ fun main() {
             enableHttp = true
         }
 
-        // CSS values assigned here are applied to all the presentations
-        css +=
-            """
-      #githubCorner path { 
-        fill: #258BD2; 
-      }
-      """
-
         presentationConfig {
             history = true
-            transition = Transition.SLIDE
-            transitionSpeed = Speed.SLOW
+            transitionSpeed = Speed.DEFAULT
 
-            topLeftHref = "https://github.com/kslides/kslides-template/" // Assign to "" to turn this off
-            topLeftTitle = "View presentation source on Github"
-
-            topRightHref = "/"  // Assign to "" to turn this off
-            topRightTitle = "Go to 1st Slide"
-            topRightText = "🏠"
-
-            enableMenu = true
             enableSpeakerNotes = true
-            theme = PresentationTheme.SOLARIZED
+            theme = PresentationTheme.DRACULA
             slideNumber = "c/t"
-
-            menuConfig {
-                numbers = true
-            }
 
             copyCodeConfig {
                 timeout = 2000
@@ -73,27 +51,6 @@ fun main() {
         }
 
         presentation {
-
-            css +=
-                """
-                #ghsrc {
-                  font-size: 30px;
-                  text-decoration: underline;
-                }  
-                img[alt=revealjs-image] { 
-                  width: 1000px; 
-                }
-                """
-
-            presentationConfig {
-                transition = Transition.CONCAVE
-
-                slideConfig {
-                    // Assign slide config defaults for all slides in this presentation
-                    //backgroundColor = "red"
-                }
-            }
-
             startPage()
             kaiserInsightPage()
 
@@ -105,8 +62,6 @@ fun main() {
             proguardR8Difference()
 
             proguardTips()
-
-            //TODO DIFFERENCE PROGUARD - R8
         }
     }
 }
