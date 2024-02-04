@@ -108,5 +108,17 @@ fun Presentation.proguardTips() {
 				""".trimIndent()
 			}
 		}
+
+		markdownSlide {
+			slideConfig {
+				transition = Transition.SLIDE
+			}
+
+			content {
+				"""
+					# consumer-proguard-rules.pro
+				""".trimIndent()
+			}
+		}
 	}
 }
