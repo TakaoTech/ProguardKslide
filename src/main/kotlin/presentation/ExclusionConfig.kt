@@ -28,7 +28,7 @@ fun Presentation.exclusionConfig() {
 			-keep [modificatore] [specifica classe/i]
 			```
 				
-			```java [1|2-3|5-10|12]
+			``` java [1|2-3|5-10|12]
 			-keep public class com.example.MyActivity
 			-keep public class * extends android.app.Activity
 			-keep class * implements android.os.Parcelable
@@ -198,7 +198,7 @@ fun Presentation.exclusionConfig() {
 			
 			``` kotlin
 			-keepclasseswithmembernames class * {        
-			  public &lt;init&lt;(android.content.Context, android.util.AttributeSet, int); 
+			  public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int); 
 			}
 
 			```
