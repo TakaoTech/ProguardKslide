@@ -24,11 +24,9 @@ fun Presentation.exclusionConfig() {
 		}
 		content {
 			"""
-			```
+			```java [1|3|4-5|7-12|14]
 			-keep [modificatore] [specifica classe/i]
-			```
-				
-			``` java [1|2-3|5-10|12]
+			
 			-keep public class com.example.MyActivity
 			-keep public class * extends android.app.Activity
 			-keep class * implements android.os.Parcelable

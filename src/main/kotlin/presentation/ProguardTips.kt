@@ -27,7 +27,8 @@ fun Presentation.proguardTips() {
 			}
 			content {
 				"""
-				![Alt text]("images/kotlinBytecode.png")
+				![Alt text](images/kotlinBytecode.png)
+				
 				Notes:
 				Arma 1: vedere il bytecode generato da kotlin
 				""".trimIndent()
@@ -84,7 +85,7 @@ fun Presentation.proguardTips() {
 			}
 			content {
 				"""
-				![Alt text]("images/apkObfuscateAfter.png")
+				![Alt text](images/apkObfuscateAfter.png)
 				
 				Notes:
 				Arma 3: ricordatevi sempre di salvare i file della mappatura
@@ -101,7 +102,7 @@ fun Presentation.proguardTips() {
 				"""
 				## ReTrace
 				
-				![Retrace Tool]("images/retrace.png")
+				![Retrace Tool](images/retrace.png)
 				
 				https://www.guardsquare.com/manual/tools/retrace
 				https://developer.android.com/tools/retrace

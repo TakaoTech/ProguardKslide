@@ -12,7 +12,7 @@ fun Presentation.proguardintroPage() {
 		}
 		content {
 			"""
-			![Alt text]("images/proguardlogo.webp")
+			![Alt text](images/proguardlogo.webp)
 			Shrink, optimize and obfuscate
 				 
 			[Repo Url](https://github.com/Guardsquare/proguard)		
