@@ -82,7 +82,20 @@
         <section data-markdown="" data-transition="slide">
             <script type="text/template">
                 ```java [1|3|4-5|7-12|14]
+                -keep [modificatore] [specifica classe/i]
 
+                -keep public class com.example.MyActivity
+                -keep public class * extends android.app.Activity
+                -keep class * implements android.os.Parcelable
+
+                -keep public class * extends android.view.View {
+                public &lt;init&gt;(android.content.Context);
+                public &lt;init&gt;(android.content.Context, android.util.AttributeSet);
+                public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);
+                public void set*(...);
+                }
+
+                -keep class com.github.** { *; }
                 ```
 
                 Notes:
@@ -251,7 +264,7 @@
             <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
                      data-transition="slide">
                 <script type="text/template">
-                    ![WhyAreYouKeeping]("images/whyareyoukeeping.png")
+                    ![WhyAreYouKeeping](images/whyareyoukeeping.png)
                 </script>
             </section>
 

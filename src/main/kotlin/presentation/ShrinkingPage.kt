@@ -50,7 +50,7 @@ fun Presentation.shrinkingConfigPage() {
 			}
 			content {
 				"""
-				![WhyAreYouKeeping]("images/whyareyoukeeping.png")
+				![WhyAreYouKeeping](images/whyareyoukeeping.png)
 				""".trimIndent()
 			}
 		}
