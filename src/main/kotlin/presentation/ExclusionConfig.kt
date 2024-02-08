@@ -25,7 +25,7 @@ fun Presentation.exclusionConfig() {
 		}
 		content {
 			"""
-			```java [1|3|4-5|7-12|14]
+			``` java [1|3|4-5|7-12|14]
 			${include("codes/exclusion1.txt")}
 			```
 				 
