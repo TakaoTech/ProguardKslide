@@ -11,7 +11,7 @@ fun Presentation.optimizationConfigPage() {
 		}
 		content {
 			"""
-			```Text [1|2|3]
+			```text [1|2|3]
 			-dontoptimize
 			-optimizations [filtro ottimizzazione]
 			-optimizationpasses n

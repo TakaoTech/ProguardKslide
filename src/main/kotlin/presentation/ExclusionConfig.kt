@@ -77,7 +77,7 @@ fun Presentation.exclusionConfig() {
 			
 			``` kotlin
 			-keepclasseswithmembers class * {          
-				public &lt;init&lt;(android.content.Context, android.util.AttributeSet, int); 
+				public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int); 
 			}
 
 
@@ -183,10 +183,7 @@ fun Presentation.exclusionConfig() {
 			```
 			
 			``` kotlin
-			-keepclasseswithmembernames class * {        
-			  public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int); 
-			}
-
+			${include("codes/exclusion1.txt")}
 			```
 			Notes:
 			Specifies classes and class members that must be present to activate 

@@ -134,15 +134,17 @@
                 ``` kotlin
                 -keepclasseswithmembers class * {
                 public
-                <init<(android.content.Context, android.util.AttributeSet, int);
-                }
+                <init>(android.content.Context, android.util.AttributeSet, int);
+                    }
 
 
-                ```
-                Notes:
-                Specifica la classe o le classi e i membri in essa contenuti non verranno rinominati o rimossi, a patto che siano presenti nelle classi tutte le condizionali specificate
+                    ```
+                    Notes:
+                    Specifica la classe o le classi e i membri in essa contenuti non verranno rinominati o rimossi, a
+                    patto che siano presenti nelle classi tutte le condizionali specificate
 
-                1) Configurato in questo modo preserverà le classi e i membri che hanno nel costruttore un Context, un AttributeSet e un int.
+                    1) Configurato in questo modo preserverà le classi e i membri che hanno nel costruttore un Context,
+                    un AttributeSet e un int.
             </script>
         </section>
 
@@ -214,18 +216,25 @@
                 ```
 
                 ``` kotlin
-                -keepclasseswithmembernames class * {
-                public
-                <init>(android.content.Context, android.util.AttributeSet, int);
-                    }
+                -keep [modificatore] [specifica classe/i]
 
-                    ```
-                    Notes:
-                    Specifies classes and class members that must be present to activate
-                    the subsequent keep option (-keep, -keepclassmembers,...).
-                    The condition and the subsequent keep option can share wildcards and references to wildcards. For
-                    example, you can keep classes on the condition that classes with related names exist in your
-                    project, with frameworks like Dagger and Butterknife.
+                -keep public class com.example.MyActivity
+                -keep public class * extends android.app.Activity
+                -keep class * implements android.os.Parcelable
+
+                -keep public class * extends android.view.View {
+                public &lt;init&gt;(android.content.Context);
+                public &lt;init&gt;(android.content.Context, android.util.AttributeSet);
+                public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);
+                public void set*(...);
+                }
+
+                -keep class com.github.** { *; }
+                ```
+                Notes:
+                Specifies classes and class members that must be present to activate
+                the subsequent keep option (-keep, -keepclassmembers,...).
+                The condition and the subsequent keep option can share wildcards and references to wildcards. For example, you can keep classes on the condition that classes with related names exist in your project, with frameworks like Dagger and Butterknife.
             </script>
         </section>
 
@@ -272,7 +281,7 @@
 
         <section data-markdown="" data-transition="slide">
             <script type="text/template">
-                ```Text [1|2|3]
+                ```text [1|2|3]
                 -dontoptimize
                 -optimizations [filtro ottimizzazione]
                 -optimizationpasses n

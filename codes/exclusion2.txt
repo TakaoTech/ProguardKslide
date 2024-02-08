@@ -1,0 +1,3 @@
+-keepclasseswithmembernames class * {
+  public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);
+}
