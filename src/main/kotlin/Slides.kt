@@ -51,6 +51,8 @@ fun main() {
         }
 
         presentation {
+            path = "/"
+
             startPage()
             kaiserInsightPage()
 
