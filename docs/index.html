@@ -85,7 +85,7 @@
                     -keep [modificatore] [specifica classe/i]
                     ```
 
-                    ``` java [1|2-3|5-10|12]
+                    ```java [1|2-3|5-10|12]
                     -keep public class com.example.MyActivity
                     -keep public class * extends android.app.Activity
                     -keep class * implements android.os.Parcelable
@@ -226,16 +226,14 @@
                     ``` kotlin
                     -keepclasseswithmembernames class * {
                     public
-                    <init>(android.content.Context, android.util.AttributeSet, int);
-                        }
+                    <init<(android.content.Context, android.util.AttributeSet, int);
+                    }
 
-                        ```
-                        Notes:
-                        Specifies classes and class members that must be present to activate
-                        the subsequent keep option (-keep, -keepclassmembers,...).
-                        The condition and the subsequent keep option can share wildcards and references to wildcards.
-                        For example, you can keep classes on the condition that classes with related names exist in your
-                        project, with frameworks like Dagger and Butterknife.
+                    ```
+                    Notes:
+                    Specifies classes and class members that must be present to activate
+                    the subsequent keep option (-keep, -keepclassmembers,...).
+                    The condition and the subsequent keep option can share wildcards and references to wildcards. For example, you can keep classes on the condition that classes with related names exist in your project, with frameworks like Dagger and Butterknife.
                 </script>
             </section>
 
