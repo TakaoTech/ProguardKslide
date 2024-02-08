@@ -1,830 +1,780 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-
+    
     <link href="revealjs/dist/reveal.css" rel="stylesheet">
     <link href="revealjs/dist/reset.css" rel="stylesheet">
     <link href="revealjs/dist/theme/dracula.css" id="theme" rel="stylesheet">
     <link href="revealjs/plugin/highlight/monokai.css" id="highlight-theme" rel="stylesheet">
     <link href="revealjs/plugin/copycode/copycode.css" rel="stylesheet">
-
+    
     <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon">
     <link href="/favicon.ico" rel="icon" type="image/x-icon">
-
+    
     <style media="screen" type="text/css">
-        /* These CSS settings are embedded directly in the presentation html */
-
-        /* This prevents auto-capitalization of headers */
-        .reveal h1,
-        .reveal h2,
-        .reveal h3,
-        .reveal h4,
-        .reveal h5,
-        .reveal h6 {
-            text-transform: none;
-        }
-
-        a.top-left {
-            position: absolute;
-            z-index: 1;
-            width: clamp(50px, 8vmax, 80px);
-            line-height: 0;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        a.top-left path {
-            fill: #258bd2;
-        }
-
-        a.top-left:hover {
-            color: white;
-        }
-
-        a.top-right {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            z-index: 1;
-        }
-
-    </style>
-</head>
-<body>
-<div class="reveal">
-
-    <div class="slides">
+			/* These CSS settings are embedded directly in the presentation html */
+		
+			/* This prevents auto-capitalization of headers */
+			.reveal h1,
+			.reveal h2,
+			.reveal h3,
+			.reveal h4,
+			.reveal h5,
+			.reveal h6 {
+			    text-transform: none;
+			}
+		
+			a.top-left {
+			    position: absolute;
+			    z-index: 1;
+			    width: clamp(50px, 8vmax, 80px);
+			    line-height: 0;
+			    color: rgba(255, 255, 255, 0.5);
+			}
+		
+			a.top-left path {
+			    fill: #258bd2;
+			}
+		
+			a.top-left:hover {
+			    color: white;
+			}
+		
+			a.top-right {
+			    position: absolute;
+			    top: 15px;
+			    right: 15px;
+			    z-index: 1;
+			}
+		
+		</style>
+  </head>
+  <body>
+    <div class="reveal">
+      
+      <div class="slides">
         <section data-background="images/vlcsnap-2023-12-18-22h05m18s966.png" data-transition="none"></section>
-
+        
         <section data-background="images/vlcsnap-2023-12-18-22h02m11s023.png" data-transition="none"></section>
-
+        
         <section data-markdown="" data-transition="zoom">
-            <script type="text/template">
-                ![Alt text](images/proguardlogo.webp)
-                Shrink, optimize and obfuscate
-
-                [Repo Url](https://github.com/Guardsquare/proguard)
-
-                Notes: ProGuard è un separatore, ottimizzatore e offuscatore per Java bytecode
-            </script>
+          <script type="text/template">
+![Alt text](images/proguardlogo.webp)
+Shrink, optimize and obfuscate
+	 
+[Repo Url](https://github.com/Guardsquare/proguard)		
+	 
+Notes: ProGuard è un separatore, ottimizzatore e offuscatore per Java bytecode
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                # Keep Configuration
-            </script>
+          <script type="text/template">
+# Keep Configuration
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```java [1|3|4-5|7-12|14]
-                -keep [modificatore] [specifica classe/i]
+          <script type="text/template">
+```java [1|3|4-5|7-12|14]
+-keep [modificatore] [specifica classe/i]
 
-                -keep public class com.example.MyActivity
-                -keep public class * extends android.app.Activity
-                -keep class * implements android.os.Parcelable
+-keep public class com.example.MyActivity
+-keep public class * extends android.app.Activity
+-keep class * implements android.os.Parcelable
 
-                -keep public class * extends android.view.View {
-                public
-                <init>(android.content.Context);
-                    public
-                    <init>(android.content.Context, android.util.AttributeSet);
-                        public
-                        <init>(android.content.Context, android.util.AttributeSet, int);
-                            public void set*(...);
-                            }
+-keep public class * extends android.view.View {
+  public <init>(android.content.Context);
+  public <init>(android.content.Context, android.util.AttributeSet);
+  public <init>(android.content.Context, android.util.AttributeSet, int);
+  public void set*(...);
+}
 
-                            -keep class com.github.** { *; }
-                            ```
+-keep class com.github.** { *; }
+```
+	 
+Notes:
+Specifica la classe o le classi e i membri in esse contenute, devono essere preservati come punto di ingresso del codice
 
-                            Notes:
-                            Specifica la classe o le classi e i membri in esse contenute, devono essere preservati come
-                            punto di ingresso del codice
-
-                            1) Configurato in questo modo salva la classe MyActivity
-                            2) Configurato in questo modo il nome delle classi e degli attributi che imlementano
-                            Parcelable non verranno rimossi o rinominati
-                            3) Configurato in questo modo tutte le classi pubbliche che estendono View, che hanno i
-                            costruttori con i parametri specificati e tutti metodi void che iniziano con set verranno
-                            mantenuti. Tutto il resto verrà modificato.
-                            4) Configurato in questo tutte le classi e tutto il contenuto, dentro al package com.github,
-                            non verrà modificato.
-            </script>
+1) Configurato in questo modo salva la classe MyActivity
+2) Configurato in questo modo il nome delle classi e degli attributi che imlementano Parcelable non verranno rimossi o rinominati
+3) Configurato in questo modo tutte le classi pubbliche che estendono View, che hanno i costruttori con i parametri specificati e tutti metodi void che iniziano con set verranno mantenuti. Tutto il resto verrà modificato.
+4) Configurato in questo tutte le classi e tutto il contenuto, dentro al package com.github, non verrà modificato.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -keepclassmembers [modificatore] [specifica classe/i]
-                ```
+          <script type="text/template">
+```
+-keepclassmembers [modificatore] [specifica classe/i]
+```
 
-                ``` kotlin
-                -keepclassmembers class * implements android.os.Parcelable {    *;}
+``` kotlin
+-keepclassmembers class * implements android.os.Parcelable {    *;}
 
-                ```
-                Notes:
-                Specifica che solo i membri della classe o classi in esse contenute devono essere preservate
+```
+Notes:
+Specifica che solo i membri della classe o classi in esse contenute devono essere preservate
 
-                1) Configurato in questo modo solo i membri delle classi che implementano Parcelable non verranno rimossi o rinominati
-            </script>
+1) Configurato in questo modo solo i membri delle classi che implementano Parcelable non verranno rimossi o rinominati
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -keepclasseswithmembers  [modificatore] [specifica classe/i]
-                ```
+          <script type="text/template">
+```
+-keepclasseswithmembers  [modificatore] [specifica classe/i]
+```
 
-                ``` kotlin
-                -keepclasseswithmembers class * {
-                public
-                <init>(android.content.Context, android.util.AttributeSet, int);
-                    }
-                    ```
-                    Notes:
-                    Specifica la classe o le classi e i membri in essa contenuti non verranno rinominati o rimossi, a
-                    patto che siano presenti nelle classi tutte le condizionali specificate
+``` kotlin
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+```
+Notes:
+Specifica la classe o le classi e i membri in essa contenuti non verranno rinominati o rimossi, a patto che siano presenti nelle classi tutte le condizionali specificate
 
-                    1) Configurato in questo modo preserverà le classi e i membri che hanno nel costruttore un Context,
-                    un AttributeSet e un int.
-            </script>
+1) Configurato in questo modo preserverà le classi e i membri che hanno nel costruttore un Context, un AttributeSet e un int.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -keepnames [specifica classe/i]
+          <script type="text/template">
+```
+-keepnames [specifica classe/i]
 
-                Alternativa a
-                -keep,allowshrinking
-                ```
+Alternativa a 
+-keep,allowshrinking
+```
 
-                ``` kotlin
-                -keepnames class your.package.name.ClassName
-                ```
-                Notes:
-                Specifica la classe o le classi e i membri in esse contenuti devono essere conservati, se non rimossi dopo la fase di riduzione
+``` kotlin
+-keepnames class your.package.name.ClassName
+```
+Notes:
+Specifica la classe o le classi e i membri in esse contenuti devono essere conservati, se non rimossi dopo la fase di riduzione
 
-                1) Dopo la fase di riduzione, verrà conservata la classe ClassName e i membri in essa contenuti nella fase di offuscamento
-            </script>
+1) Dopo la fase di riduzione, verrà conservata la classe ClassName e i membri in essa contenuti nella fase di offuscamento
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -keepclassmembernames [specifica classe/i]
+          <script type="text/template">
+```
+-keepclassmembernames [specifica classe/i]
 
-                Alternativa a
-                -keepclassmembers,allowshrinking
-                ```
+Alternativa a 
+-keepclassmembers,allowshrinking
+```
 
-                ``` kotlin
-                -keepnames class your.package.name.ClassName
-                ```
-                Notes:
-                Specifica la classe o le classi e i membri in esse contenuti devono essere conservati, se non rimossi dopo la fase di riduzione
+``` kotlin
+-keepnames class your.package.name.ClassName
+```
+Notes:
+Specifica la classe o le classi e i membri in esse contenuti devono essere conservati, se non rimossi dopo la fase di riduzione
 
-                1) Dopo la fase di riduzione, verrà conservata la classe ClassName e i membri in essa contenuti nella fase di offuscamento
-            </script>
+1) Dopo la fase di riduzione, verrà conservata la classe ClassName e i membri in essa contenuti nella fase di offuscamento
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -keepclasseswithmembernames [specifica classe/i]
+          <script type="text/template">
+```
+-keepclasseswithmembernames [specifica classe/i]
 
-                Alternativa a
-                -keepclasseswithmembers,allowshrinking [specifica classe/i]
-                ```
+Alternativa a 
+-keepclasseswithmembers,allowshrinking [specifica classe/i]
+```
 
-                ``` kotlin
-                -keepclasseswithmembernames class * {
-                public
-                <init>(android.content.Context, android.util.AttributeSet, int);
-                    }
+``` kotlin
+-keepclasseswithmembernames class * {        
+  public <init>(android.content.Context, android.util.AttributeSet, int); 
+}
 
-                    ```
-                    Notes:
-                    Specifica la classe o le classi e i membri i cui nomi devono essere conservati se le condizioni
-                    vengono rispettate, se sono presenti dopo la fase di riduzione
+```
+Notes:
+Specifica la classe o le classi e i membri i cui nomi devono essere conservati se le condizioni vengono rispettate, se sono presenti dopo la fase di riduzione
 
-                    1) Dopo la fase di riduzione, tutte le classi che contengono il costruttore con parametri Context,
-                    AttributeSet e int, non verranno offuscate le classi e i membri
-            </script>
+1) Dopo la fase di riduzione, tutte le classi che contengono il costruttore con parametri Context, AttributeSet e int, non verranno offuscate le classi e i membri
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -if [specifica classe/i]
-                ```
+          <script type="text/template">
+```
+-if [specifica classe/i]
+```
 
-                ``` kotlin
-                -keepclasseswithmembernames class * {
-                public
-                <init>(android.content.Context, android.util.AttributeSet, int);
-                    }
-                    ```
-                    Notes:
-                    Specifies classes and class members that must be present to activate
-                    the subsequent keep option (-keep, -keepclassmembers,...).
-                    The condition and the subsequent keep option can share wildcards and references to wildcards. For
-                    example, you can keep classes on the condition that classes with related names exist in your
-                    project, with frameworks like Dagger and Butterknife.
-            </script>
+``` kotlin
+-keepclasseswithmembernames class * {
+  public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+```
+Notes:
+Specifies classes and class members that must be present to activate 
+the subsequent keep option (-keep, -keepclassmembers,...). 
+The condition and the subsequent keep option can share wildcards and references to wildcards. For example, you can keep classes on the condition that classes with related names exist in your project, with frameworks like Dagger and Butterknife.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                # Shrinking Configuration
-            </script>
+          <script type="text/template">
+# Shrinking Configuration
+</script>
         </section>
-
+        
         <section>
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    ```Java
-                    -dontshrink
-
-                    -printusage [nome file]
-                    -printusage
-                    <output-dir>/usage.txt
-
-                        -whyareyoukeeping [specifica classe/i]
-                        ```
-
-                        Notes:
-                        1) Specifica a ProGuard di non ridurre il codice. Di default ProGuard rimuove tutte le classi e
-                        i membri non usati,
-                        mantenendo solo le esclusioni. Dopo ogni fase di ottimizzazione viene applicata nuovamente la
-                        fase di riduzione.
-                        2) Specifica a ProGuard di elencare il codice che verrà rimosso dalla classe in input e di
-                        stamparlo (o salvarlo su file)
-                        3) Specifica a ProGuard di stampare il motivo per cui le classi e relativi membri verranno
-                        mantenuti dopo la fase di riduzione
-                </script>
-            </section>
-
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    ![WhyAreYouKeeping](images/whyareyoukeeping.png)
-                </script>
-            </section>
-
-        </section>
-
-        <section data-markdown="" data-transition="slide">
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
             <script type="text/template">
-                ```text [1|2|3]
-                -dontoptimize
-                -optimizations [filtro ottimizzazione]
-                -optimizationpasses n
-                ```
+```Java
+-dontshrink
 
-                Notes:
-                1) Specifica a ProGuard di non ottimizzare il codice. Di default ProGuard ottimizza tutto il codice a livello di bytecode
-                2) Specifica le ottimizzazioni da abilitare e disabilitare, a un livello più preciso. Si applica solo durante l'ottimizzazione. Questa è un'opzione per i maniaci del pulito.
-                3) Specifica a ProGuard il numero di passaggi di ottimizzazione che devono essere eseguiti.
-            </script>
-        </section>
+-printusage [nome file]
+-printusage <output-dir>/usage.txt
 
-        <section data-markdown="" data-transition="slide">
+-whyareyoukeeping [specifica classe/i]
+```
+
+Notes:
+1) Specifica a ProGuard di non ridurre il codice. Di default ProGuard rimuove tutte le classi e i membri non usati,
+mantenendo solo le esclusioni. Dopo ogni fase di ottimizzazione viene applicata nuovamente la fase di riduzione.
+2) Specifica a ProGuard di elencare il codice che verrà rimosso dalla classe in input e di stamparlo (o salvarlo su file)
+3) Specifica a ProGuard di stampare il motivo per cui le classi e relativi membri verranno mantenuti dopo la fase di riduzione
+</script>
+          </section>
+          
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
             <script type="text/template">
-                ```
-                -optimizationpasses
-                <numero>
-                    ```
-
-                    Notes:
-                    Specifica a ProGuard il numero di passaggi di ottimizzazione che devono essere eseguiti.
-            </script>
+![WhyAreYouKeeping](images/whyareyoukeeping.png)
+</script>
+          </section>
+          
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -assumenosideeffects [specifica classe]
+          <script type="text/template">
+```text [1|2|3]
+-dontoptimize
+-optimizations [filtro ottimizzazione]
+-optimizationpasses n
+```
 
-                -assumenosideeffects class android.util.Log {
-                public static boolean isLoggable(java.lang.String, int);
-                public static int v(...);
-                public static int i(...);
-                public static int w(...);
-                public static int d(...);
-                public static int e(...);
-                }
-                ```
-
-                Notes:
-                Specifica i metodi che non hanno nessun effetto collaterale, oltre alla possibilità di restituire un valore.
-                Nella fase di ottimizzazione ProGuard rimuoverà tali metodi se determina che i valori restituiti non vengano usati.
-                Usare con cautela, potrebbe rompere il codice.
-            </script>
+Notes:
+1) Specifica a ProGuard di non ottimizzare il codice. Di default ProGuard ottimizza tutto il codice a livello di bytecode
+2) Specifica le ottimizzazioni da abilitare e disabilitare, a un livello più preciso. Si applica solo durante l'ottimizzazione. Questa è un'opzione per i maniaci del pulito.
+3) Specifica a ProGuard il numero di passaggi di ottimizzazione che devono essere eseguiti.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -assumenoexternalsideeffects [specifica classe]
-                -assumenoescapingparameters [specifica classe]
-                -assumenoexternalreturnvalues [specifica classe]
-                ```
+          <script type="text/template">
+```
+-optimizationpasses <numero>
+```
 
-                Notes:
-                Usare con cautela, potrebbe rompere il codice.
-            </script>
+Notes:
+Specifica a ProGuard il numero di passaggi di ottimizzazione che devono essere eseguiti.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```
-                -assumevalues [specifica classe/i]
+          <script type="text/template">
+```
+-assumenosideeffects [specifica classe]
 
-                -assumevalues class Count {
-                static int count return 0..2147483647;
-                }
+-assumenosideeffects class android.util.Log {    
+	public static boolean isLoggable(java.lang.String, int);    
+	public static int v(...);    
+	public static int i(...);    
+	public static int w(...);   
+	public static int d(...);    
+	public static int e(...);
+}
+```
 
-                if (count/* [0..2147483647] */ < 0) {
-                throw new IllegalStateException();
-                }
-
-
-                if (false) {
-                throw new IllegalStateException();
-                }
-                ```
-
-                Notes:
-                Specifica dei valori fissi o intervalli di valori per i campi e metodi primitivi,
-                adattando l'ottimizzazione di ProGuard su quei valori.
-            </script>
+Notes:
+Specifica i metodi che non hanno nessun effetto collaterale, oltre alla possibilità di restituire un valore.
+Nella fase di ottimizzazione ProGuard rimuoverà tali metodi se determina che i valori restituiti non vengano usati.
+Usare con cautela, potrebbe rompere il codice.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```Text
-                -mergeinterfacesaggressively
-                ```
+          <script type="text/template">
+```
+-assumenoexternalsideeffects [specifica classe]
+-assumenoescapingparameters [specifica classe]
+-assumenoexternalreturnvalues [specifica classe]
+```
 
-                Notes:
-                Specifica che le interfacce possono essere unite, anche se le relative classi
-                di implementazione non implementano tutti i metodi di interfaccia.
-                Ciò può ridurre la dimensione dell'output riducendo il numero totale di classi.
-                Si noti che le specifiche di compatibilità binaria di Java consentono tali costrutti.
-                l'impostazione di questa opzione può ridurre le prestazioni del codice elaborato su alcune JVM,
-                poiché la compilazione just-in-time avanzata tende a privilegiare più interfacce con meno classi di implementazione.
-            </script>
+Notes:
+Usare con cautela, potrebbe rompere il codice.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```Text
-                -optimizeaggressively
-                ```
+          <script type="text/template">
+```
+-assumevalues [specifica classe/i]
 
-                Notes:
-            </script>
+-assumevalues class Count {  
+	static int count return 0..2147483647;
+}
+
+if (count/* [0..2147483647] */ < 0) {  
+	throw new IllegalStateException();
+}
+
+
+if (false) {  
+	throw new IllegalStateException();
+}
+```
+
+Notes:
+Specifica dei valori fissi o intervalli di valori per i campi e metodi primitivi, 
+adattando l'ottimizzazione di ProGuard su quei valori.
+</script>
         </section>
-
+        
         <section data-markdown="" data-transition="slide">
-            <script type="text/template">
-                ```Text
-                -allowaccessmodification
+          <script type="text/template">
+```Text
+-mergeinterfacesaggressively
+```
 
-                ```
-
-                Notes:
-                Specifica a ProGuard che i modificatori di accesso alle classi e membri della classe possono essere ampliati, ad esempio con un getter pubblico potrebbe essere necessario rendere pubblica anche il campo.
-                Nota: non usare sulle librerie
-            </script>
+Notes:
+Specifica che le interfacce possono essere unite, anche se le relative classi 
+di implementazione non implementano tutti i metodi di interfaccia. 
+Ciò può ridurre la dimensione dell'output riducendo il numero totale di classi. 
+Si noti che le specifiche di compatibilità binaria di Java consentono tali costrutti.
+ l'impostazione di questa opzione può ridurre le prestazioni del codice elaborato su alcune JVM, 
+ poiché la compilazione just-in-time avanzata tende a privilegiare più interfacce con meno classi di implementazione.
+</script>
         </section>
+        
+        <section data-markdown="" data-transition="slide">
+          <script type="text/template">
+```Text
+-optimizeaggressively
+```
 
+Notes:
+</script>
+        </section>
+        
+        <section data-markdown="" data-transition="slide">
+          <script type="text/template">
+```Text
+-allowaccessmodification
+
+```
+
+Notes:
+Specifica a ProGuard che i modificatori di accesso alle classi e membri della classe possono essere ampliati, ad esempio con un getter pubblico potrebbe essere necessario rendere pubblica anche il campo.
+Nota: non usare sulle librerie	
+</script>
+        </section>
+        
         <section data-transition="slide">
-
-            <style>
-                #mioDiv::-webkit-scrollbar {
-                    width: 20px;
-                }
-
-                /* Track */
-                #mioDiv::-webkit-scrollbar-track {
-                    box-shadow: inset 0 0 5px grey;
-                    border-radius: 10px;
-                }
-
-                /* Handle */
-                #mioDiv::-webkit-scrollbar-thumb {
-                    background: #8fb0e0;
-                    border-radius: 10px;
-                }
-
-                /* Handle on hover */
-                #mioDiv::-webkit-scrollbar-thumb:hover {
-                    background: #8fb0e0;
-                }
-
-                #mioDiv {
-                    overflow: auto;
-                    height: 500px;
-                }
-
-            </style>
-
-            <div id="mioDiv">
-
-                <table cellspacing="0"
-                       style="border-width: 1px; border-style: solid; margin-left: auto; margin-right: auto;">
-
-                    <tbody>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;" width="70%"><strong>Optimization</strong>
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;" width="15%">
-                            <strong>ProGuard</strong></td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;" width="15%">
-                            <strong>R8</strong></td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove unused
-                            classes/fields/methods
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Inline constants</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constants</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove unused code</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constant arguments
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constant fields</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove write-only fields</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Make classes/fields/methods
-                            final/...
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Simplify plain enum types</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Simplify basic container
-                            classes
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Merge interfaces with single
-                            implementations
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Merge classes</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove unused parameters</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constant return
-                            values
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Make methods private</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Make methods static</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Desynchronize methods</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Simplify tail recursion</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Inline methods</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Outline common code into new
-                            methods
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Merge code</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Backport Java 8 closures</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Optimize Kotlin constructs
-                        </td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Optimize use of GSON</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove logging calls</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove logging code</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">/</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">Peephole optimizations</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">520</td>
-                        <td style="border-width: 1px; border-style: solid; padding: 0px;">6</td>
-
-                    </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
+          
+          <style>
+#mioDiv::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+#mioDiv::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+#mioDiv::-webkit-scrollbar-thumb {
+  background: #8fb0e0; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#mioDiv::-webkit-scrollbar-thumb:hover {
+  background: #8fb0e0; 
+}
+
+#mioDiv {
+  overflow: auto;
+  height: 500px;
+}
+
+</style>
+          
+          <div id="mioDiv">
+            
+            <table cellspacing="0" style="border-width: 1px; border-style: solid; margin-left: auto; margin-right: auto;">
+              
+              <tbody>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;" width="70%"><strong>Optimization</strong></td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;" width="15%"><strong>ProGuard</strong></td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;" width="15%"><strong>R8</strong></td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove unused classes/fields/methods</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Inline constants</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constants</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove unused code</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constant arguments</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constant fields</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove write-only fields</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Make classes/fields/methods final/...</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Simplify plain enum types</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Simplify basic container classes</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Merge interfaces with single implementations</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Merge classes</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove unused parameters</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Propagate constant return values</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Make methods private</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Make methods static</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Desynchronize methods</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Simplify tail recursion</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Inline methods</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Outline common code into new methods</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Merge code</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Backport Java 8 closures</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Optimize Kotlin constructs</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Optimize use of GSON</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">&nbsp;</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove logging calls</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Remove logging code</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">x</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">/</td>
+
+                </tr>
+                
+                <tr>
+                  
+                  <td style="border-width: 1px; border-style: solid; padding: 0px;">Peephole optimizations</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">520</td>
+<td style="border-width: 1px; border-style: solid; padding: 0px;">6</td>
+
+                </tr>
+                
+              </tbody>
+              
+            </table>
+            
+          </div>
         </section>
-
+        
         <section>
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    Differenza peso tra Proguard e R8
-                    ![Nothing](https://media1.tenor.com/m/dG_tr_lmYHkAAAAC/looking-around.gif)
-                </script>
-            </section>
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+Differenza peso tra Proguard e R8
+![Nothing](https://media1.tenor.com/m/dG_tr_lmYHkAAAAC/looking-around.gif)
+</script>
+          </section>
+          
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="">
+            <script type="text/template">
+OK va bene ci ho provato, ma hanno reso quasi impossibile tornare a proguard su AGP 7,
+e AGP8 è fuori supporto da Guardsquare per mancanza di interesse.
 
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="">
-                <script type="text/template">
-                    OK va bene ci ho provato, ma hanno reso quasi impossibile tornare a proguard su AGP 7,
-                    e AGP8 è fuori supporto da Guardsquare per mancanza di interesse.
-
-                    [AGP8 Nope](https://github.com/Guardsquare/proguard/issues/280)
-                </script>
-            </section>
-
+[AGP8 Nope](https://github.com/Guardsquare/proguard/issues/280)
+</script>
+          </section>
+          
         </section>
-
+        
         <section>
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    Tips su proguard
-                </script>
-            </section>
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+Tips su proguard
+</script>
+          </section>
+          
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+![Alt text](images/kotlinBytecode.png)
 
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    ![Alt text](images/kotlinBytecode.png)
+Notes:
+Arma 1: vedere il bytecode generato da kotlin
+</script>
+          </section>
+          
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+[Intrinsics](https://raw.githubusercontent.com/JetBrains/kotlin/master/libraries/stdlib/jvm/runtime/kotlin/jvm/internal/Intrinsics.java)
 
-                    Notes:
-                    Arma 1: vedere il bytecode generato da kotlin
-                </script>
-            </section>
+```Kotlin
+Intrinsics.checkParameterIsNotNull(importantString, "importantString")
+Intrinsics.throwUninitializedPropertyAccessException("importantVar")
+```
 
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    [Intrinsics](https://raw.githubusercontent.com/JetBrains/kotlin/master/libraries/stdlib/jvm/runtime/kotlin/jvm/internal/Intrinsics.java)
+```Java
+-assumenosideeffects class kotlin.jvm.internal.Intrinsics {
+    public static void checkNotNull(java.lang.Object);
+    public static void checkNotNull(java.lang.Object, java.lang.String);
+    public static void checkExpressionValueIsNotNull(java.lang.Object, java.lang.String);
+    public static void checkNotNullExpressionValue(java.lang.Object, java.lang.String);
+    public static void checkReturnedValueIsNotNull(java.lang.Object, java.lang.String, java.lang.String);
+    public static void checkReturnedValueIsNotNull(java.lang.Object, java.lang.String);
+    public static void checkFieldIsNotNull(java.lang.Object, java.lang.String, java.lang.String);
+    public static void checkFieldIsNotNull(java.lang.Object, java.lang.String);
+    public static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
+    public static void checkNotNullParameter(java.lang.Object, java.lang.String);
+}
+```
+</script>
+          </section>
+          
+          <section data-transition="slide">
+            <img src="images/apkObfuscateBefore.png">
+          </section>
+          
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+![Alt text](images/apkObfuscateAfter.png)
 
-                    ```Kotlin
-                    Intrinsics.checkParameterIsNotNull(importantString, "importantString")
-                    Intrinsics.throwUninitializedPropertyAccessException("importantVar")
-                    ```
-
-                    ```Java
-                    -assumenosideeffects class kotlin.jvm.internal.Intrinsics {
-                    public static void checkNotNull(java.lang.Object);
-                    public static void checkNotNull(java.lang.Object, java.lang.String);
-                    public static void checkExpressionValueIsNotNull(java.lang.Object, java.lang.String);
-                    public static void checkNotNullExpressionValue(java.lang.Object, java.lang.String);
-                    public static void checkReturnedValueIsNotNull(java.lang.Object, java.lang.String, java.lang.String);
-                    public static void checkReturnedValueIsNotNull(java.lang.Object, java.lang.String);
-                    public static void checkFieldIsNotNull(java.lang.Object, java.lang.String, java.lang.String);
-                    public static void checkFieldIsNotNull(java.lang.Object, java.lang.String);
-                    public static void checkParameterIsNotNull(java.lang.Object, java.lang.String);
-                    public static void checkNotNullParameter(java.lang.Object, java.lang.String);
-                    }
-                    ```
-                </script>
-            </section>
-
-            <section data-transition="slide">
-                <img src="images/apkObfuscateBefore.png">
-            </section>
-
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    ![Alt text](images/apkObfuscateAfter.png)
-
-                    Notes:
-                    Arma 3: ricordatevi sempre di salvare i file della mappatura
-                </script>
-            </section>
-
-            <section data-background-image="images/retrace.png" data-markdown="" data-separator=""
-                     data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
-                <script type="text/template">
-                    ## ReTrace
-                    https://www.guardsquare.com/manual/tools/retrace
-                    https://developer.android.com/tools/retrace
-                </script>
-            </section>
-
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
-                <script type="text/template">
-                    # consumer-proguard-rules.pro
-                </script>
-            </section>
-
+Notes:
+Arma 3: ricordatevi sempre di salvare i file della mappatura
+</script>
+          </section>
+          
+          <section data-background-image="images/retrace.png" data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+## ReTrace				
+https://www.guardsquare.com/manual/tools/retrace
+https://developer.android.com/tools/retrace
+</script>
+          </section>
+          
+          <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
+            <script type="text/template">
+# consumer-proguard-rules.pro
+</script>
+          </section>
+          
         </section>
-
+        
+      </div>
     </div>
-</div>
+    	
+	<script src="revealjs/dist/reveal.js"></script>
+	<script src="revealjs/plugin/notes/notes.js"></script>
+	<script src="revealjs/plugin/zoom/zoom.js"></script>
+	<script src="revealjs/plugin/search/search.js"></script>
+	<script src="revealjs/plugin/markdown/markdown.js"></script>
+	<script src="revealjs/plugin/highlight/highlight.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+	<script src="revealjs/plugin/copycode/copycode.js"></script>
 
-<script src="revealjs/dist/reveal.js"></script>
-<script src="revealjs/plugin/notes/notes.js"></script>
-<script src="revealjs/plugin/zoom/zoom.js"></script>
-<script src="revealjs/plugin/search/search.js"></script>
-<script src="revealjs/plugin/markdown/markdown.js"></script>
-<script src="revealjs/plugin/highlight/highlight.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
-<script src="revealjs/plugin/copycode/copycode.js"></script>
+	<script>
+		Reveal.initialize({
+			history: true,
+			transitionSpeed: 'default',
 
-<script>
-    Reveal.initialize({
-        history: true,
-        transitionSpeed: 'default',
+			slideNumber: 'c/t',
 
-        slideNumber: 'c/t',
+			scrollLayout: 'full',
 
-        scrollLayout: 'full',
+			scrollProgress: 'auto',
 
-        scrollProgress: 'auto',
+			scrollActivationWidth: 1,
 
-        scrollActivationWidth: 1,
+			scrollSnap: 'mandatory',
 
-        scrollSnap: 'mandatory',
-
-        copycode: {
-            timeout: 2000,
-            copy: 'Copy',
-            copied: 'Copied!'
-        },
-
-        plugins: [RevealNotes, RevealZoom, RevealSearch, RevealMarkdown, RevealHighlight, CopyCode]
-    });
+			copycode: {
+				timeout: 2000,
+				copy: 'Copy',
+				copied: 'Copied!'
+			},
+			
+			plugins: [ RevealNotes, RevealZoom, RevealSearch, RevealMarkdown, RevealHighlight, CopyCode ]
+		});
 
 </script>
-</body>
+  </body>
 </html>
 
