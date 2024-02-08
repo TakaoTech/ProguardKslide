@@ -2,6 +2,7 @@ package presentation
 
 import com.kslides.Presentation
 import com.kslides.Transition
+import com.kslides.include
 
 fun Presentation.optimizationConfigPage() {
 	markdownSlide {
@@ -33,7 +34,7 @@ fun Presentation.optimizationConfigPage() {
 		content {
 			"""
 			```
-			-optimizationpasses &lt;numero&gt;
+			${include("codes/optimization1.txt")}
 			```
 	
 			Notes:

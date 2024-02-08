@@ -5,9 +5,9 @@
 -keep class * implements android.os.Parcelable
 
 -keep public class * extends android.view.View {
-  public &lt;init&gt;(android.content.Context);
-  public &lt;init&gt;(android.content.Context, android.util.AttributeSet);
-  public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);
+  public <init>(android.content.Context);
+  public <init>(android.content.Context, android.util.AttributeSet);
+  public <init>(android.content.Context, android.util.AttributeSet, int);
   public void set*(...);
 }
 

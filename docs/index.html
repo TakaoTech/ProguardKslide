@@ -89,22 +89,30 @@
                 -keep class * implements android.os.Parcelable
 
                 -keep public class * extends android.view.View {
-                public &lt;init&gt;(android.content.Context);
-                public &lt;init&gt;(android.content.Context, android.util.AttributeSet);
-                public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);
-                public void set*(...);
-                }
+                public
+                <init>(android.content.Context);
+                    public
+                    <init>(android.content.Context, android.util.AttributeSet);
+                        public
+                        <init>(android.content.Context, android.util.AttributeSet, int);
+                            public void set*(...);
+                            }
 
-                -keep class com.github.** { *; }
-                ```
+                            -keep class com.github.** { *; }
+                            ```
 
-                Notes:
-                Specifica la classe o le classi e i membri in esse contenute, devono essere preservati come punto di ingresso del codice
+                            Notes:
+                            Specifica la classe o le classi e i membri in esse contenute, devono essere preservati come
+                            punto di ingresso del codice
 
-                1) Configurato in questo modo salva la classe MyActivity
-                2) Configurato in questo modo il nome delle classi e degli attributi che imlementano Parcelable non verranno rimossi o rinominati
-                3) Configurato in questo modo tutte le classi pubbliche che estendono View, che hanno i costruttori con i parametri specificati e tutti metodi void che iniziano con set verranno mantenuti. Tutto il resto verrà modificato.
-                4) Configurato in questo tutte le classi e tutto il contenuto, dentro al package com.github, non verrà modificato.
+                            1) Configurato in questo modo salva la classe MyActivity
+                            2) Configurato in questo modo il nome delle classi e degli attributi che imlementano
+                            Parcelable non verranno rimossi o rinominati
+                            3) Configurato in questo modo tutte le classi pubbliche che estendono View, che hanno i
+                            costruttori con i parametri specificati e tutti metodi void che iniziano con set verranno
+                            mantenuti. Tutto il resto verrà modificato.
+                            4) Configurato in questo tutte le classi e tutto il contenuto, dentro al package com.github,
+                            non verrà modificato.
             </script>
         </section>
 
@@ -136,8 +144,6 @@
                 public
                 <init>(android.content.Context, android.util.AttributeSet, int);
                     }
-
-
                     ```
                     Notes:
                     Specifica la classe o le classi e i membri in essa contenuti non verranno rinominati o rimossi, a
@@ -198,14 +204,16 @@
                 ``` kotlin
                 -keepclasseswithmembernames class * {
                 public
-                <init<(android.content.Context, android.util.AttributeSet, int);
-                }
+                <init>(android.content.Context, android.util.AttributeSet, int);
+                    }
 
-                ```
-                Notes:
-                Specifica la classe o le classi e i membri i cui nomi devono essere conservati se le condizioni vengono rispettate, se sono presenti dopo la fase di riduzione
+                    ```
+                    Notes:
+                    Specifica la classe o le classi e i membri i cui nomi devono essere conservati se le condizioni
+                    vengono rispettate, se sono presenti dopo la fase di riduzione
 
-                1) Dopo la fase di riduzione, tutte le classi che contengono il costruttore con parametri Context, AttributeSet e int, non verranno offuscate le classi e i membri
+                    1) Dopo la fase di riduzione, tutte le classi che contengono il costruttore con parametri Context,
+                    AttributeSet e int, non verranno offuscate le classi e i membri
             </script>
         </section>
 
@@ -216,25 +224,17 @@
                 ```
 
                 ``` kotlin
-                -keep [modificatore] [specifica classe/i]
-
-                -keep public class com.example.MyActivity
-                -keep public class * extends android.app.Activity
-                -keep class * implements android.os.Parcelable
-
-                -keep public class * extends android.view.View {
-                public &lt;init&gt;(android.content.Context);
-                public &lt;init&gt;(android.content.Context, android.util.AttributeSet);
-                public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);
-                public void set*(...);
-                }
-
-                -keep class com.github.** { *; }
-                ```
-                Notes:
-                Specifies classes and class members that must be present to activate
-                the subsequent keep option (-keep, -keepclassmembers,...).
-                The condition and the subsequent keep option can share wildcards and references to wildcards. For example, you can keep classes on the condition that classes with related names exist in your project, with frameworks like Dagger and Butterknife.
+                -keepclasseswithmembernames class * {
+                public
+                <init>(android.content.Context, android.util.AttributeSet, int);
+                    }
+                    ```
+                    Notes:
+                    Specifies classes and class members that must be present to activate
+                    the subsequent keep option (-keep, -keepclassmembers,...).
+                    The condition and the subsequent keep option can share wildcards and references to wildcards. For
+                    example, you can keep classes on the condition that classes with related names exist in your
+                    project, with frameworks like Dagger and Butterknife.
             </script>
         </section>
 
@@ -770,13 +770,10 @@
                 </script>
             </section>
 
-            <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical=""
-                     data-transition="slide">
+            <section data-background-image="images/retrace.png" data-markdown="" data-separator=""
+                     data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
                 <script type="text/template">
                     ## ReTrace
-
-                    ![Retrace Tool](images/retrace.png)
-
                     https://www.guardsquare.com/manual/tools/retrace
                     https://developer.android.com/tools/retrace
                 </script>

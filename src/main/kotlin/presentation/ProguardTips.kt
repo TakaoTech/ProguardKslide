@@ -97,13 +97,11 @@ fun Presentation.proguardTips() {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
 				transition = Transition.SLIDE
+				backgroundImage = "images/retrace.png"
 			}
 			content {
 				"""
-				## ReTrace
-				
-				![Retrace Tool](images/retrace.png)
-				
+				## ReTrace				
 				https://www.guardsquare.com/manual/tools/retrace
 				https://developer.android.com/tools/retrace
 				""".trimIndent()

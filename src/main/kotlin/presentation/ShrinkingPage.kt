@@ -2,6 +2,7 @@ package presentation
 
 import com.kslides.Presentation
 import com.kslides.Transition
+import com.kslides.include
 
 fun Presentation.shrinkingConfigPage() {
 	markdownSlide {
@@ -25,12 +26,7 @@ fun Presentation.shrinkingConfigPage() {
 			content {
 				"""
 				```Java
-				-dontshrink
-				
-				-printusage [nome file]
-				-printusage &lt;output-dir&gt;/usage.txt
-				
-				-whyareyoukeeping [specifica classe/i]
+				${include("codes/shrink1.txt")}
 				```
 				
 				Notes:

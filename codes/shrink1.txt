@@ -1,0 +1,6 @@
+-dontshrink
+
+-printusage [nome file]
+-printusage <output-dir>/usage.txt
+
+-whyareyoukeeping [specifica classe/i]
