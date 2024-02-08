@@ -2,6 +2,7 @@ package presentation
 
 import com.kslides.Presentation
 import com.kslides.Transition
+import com.kslides.include
 
 fun Presentation.exclusionConfig() {
 	markdownSlide {
@@ -25,20 +26,7 @@ fun Presentation.exclusionConfig() {
 		content {
 			"""
 			```java [1|3|4-5|7-12|14]
-			-keep [modificatore] [specifica classe/i]
-			
-			-keep public class com.example.MyActivity
-			-keep public class * extends android.app.Activity
-			-keep class * implements android.os.Parcelable
-			
-			-keep public class * extends android.view.View { 
-			  public &lt;init&gt;(android.content.Context); 
-			  public &lt;init&gt;(android.content.Context, android.util.AttributeSet);
-			  public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int); 
-			  public void set*(...); 
-			}
-			
-			-keep class com.github.** { *; }
+			${include("codes/exclusion1.txt")}
 			```
 				 
 			Notes:
@@ -48,7 +36,7 @@ fun Presentation.exclusionConfig() {
 			2) Configurato in questo modo il nome delle classi e degli attributi che imlementano Parcelable non verranno rimossi o rinominati
 			3) Configurato in questo modo tutte le classi pubbliche che estendono View, che hanno i costruttori con i parametri specificati e tutti metodi void che iniziano con set verranno mantenuti. Tutto il resto verrà modificato.
 			4) Configurato in questo tutte le classi e tutto il contenuto, dentro al package com.github, non verrà modificato.
-			"""
+			""".trimIndent()
 		}
 	}
 
