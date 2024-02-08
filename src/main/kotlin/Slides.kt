@@ -64,6 +64,16 @@ fun main() {
             proguardR8Difference()
 
             proguardTips()
+
+            dslSlide {
+                slideConfig {
+                    backgroundImage = "images/Priconnemm.gif"
+                }
+
+                content {
+
+                }
+            }
         }
     }
 }
