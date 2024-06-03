@@ -75,7 +75,8 @@ fun main() {
                 }
             }
 
-            startAndClosePage()
+            startAndClosePage("Grazie per l'ascolto")
+            kotlinItalia()
         }
     }
 }
