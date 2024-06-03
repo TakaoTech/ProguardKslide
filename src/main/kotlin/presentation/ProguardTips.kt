@@ -2,19 +2,22 @@ package presentation
 
 import com.kslides.Presentation
 import com.kslides.Transition
+import kotlinx.html.h1
+import kotlinx.html.h2
 import kotlinx.html.img
 
 fun Presentation.proguardTips() {
 	verticalSlides {
-		markdownSlide {
+		dslSlide {
 			slideConfig {
 				// Assign slide config defaults for all slides in this presentation
 				transition = Transition.SLIDE
+				backgroundImage = "images/0603.gif"
 			}
 			content {
-				"""
-			 	Tips su proguard
-				""".trimIndent()
+				h2 {
+					+ "Tips su proguard"
+				}
 			}
 		}
 

@@ -53,7 +53,7 @@ fun main() {
         presentation {
             path = "/"
 
-            startPage()
+            startAndClosePage()
             kaiserInsightPage()
 
             proguardintroPage()
@@ -74,6 +74,8 @@ fun main() {
 
                 }
             }
+
+            startAndClosePage()
         }
     }
 }

@@ -1,0 +1,11 @@
+[@annotationtype] [[!]public|final|abstract|@ ...] [!]interface|class|enum classname
+    [extends|implements [@annotationtype] classname]
+[{
+    [@annotationtype]
+    [[!]public|private|protected|static|volatile|transient ...]
+    <fields> | (fieldtype fieldname [= values]);
+
+    [@annotationtype]
+    [[!]public|private|protected|static|synchronized|native|abstract|strictfp ...]
+    <methods> | <init>(argumenttype,...) | classname(argumenttype,...) | (returntype methodname(argumenttype,...) [return values]);
+}]

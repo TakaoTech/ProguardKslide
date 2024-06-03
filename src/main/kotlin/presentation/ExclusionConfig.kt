@@ -12,6 +12,26 @@ fun Presentation.exclusionConfig() {
 		}
 		content {
 			"""
+			### Exclusion Template
+			
+			```	
+			${include("codes/exclusionTemplate.txt")}
+			```
+			
+			Notes:
+			- [] Sono opzionali
+			""".trimIndent()
+		}
+	}
+
+
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.SLIDE
+		}
+		content {
+			"""
 				# Keep Configuration
 			""".trimIndent()
 		}
@@ -186,6 +206,17 @@ fun Presentation.exclusionConfig() {
 			the subsequent keep option (-keep, -keepclassmembers,...). 
 			The condition and the subsequent keep option can share wildcards and references to wildcards. For example, you can keep classes on the condition that classes with related names exist in your project, with frameworks like Dagger and Butterknife.
 			""".trimIndent()
+		}
+	}
+
+	dslSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.SLIDE
+			backgroundImage = "images/karyl-confused.png"
+		}
+		content {
+
 		}
 	}
 }
