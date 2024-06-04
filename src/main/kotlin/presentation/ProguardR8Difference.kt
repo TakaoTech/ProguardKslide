@@ -218,4 +218,50 @@ fun Presentation.proguardR8Difference() {
 			}
 		}
 	}
+
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.SLIDE
+
+		}
+
+		content {
+			"""
+				### Shrink Resources 
+				
+				```
+buildTypes {
+	release {
+		shrinkResources true
+		minifyEnabled true
+		proguardFiles
+			getDefaultProguardFile('proguard-android.txt'),
+			'proguard-rules.pro'
+	}
+}
+				```
+			""".trimIndent()
+		}
+	}
+
+	markdownSlide {
+		slideConfig {
+			// Assign slide config defaults for all slides in this presentation
+			transition = Transition.SLIDE
+
+		}
+
+		content {
+			"""
+				### Shrink Resources 
+				
+				```
+				&lt;resources xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+				
+				tools:keep=&quot;@layout/l_used*_c,@layout/l_used_a,@layout/l_used_b*&quot;/&gt;
+				```
+			""".trimIndent()
+		}
+	}
 }

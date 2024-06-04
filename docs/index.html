@@ -701,6 +701,36 @@ e AGP8 è fuori supporto da Guardsquare per mancanza di interesse.
           
         </section>
         
+        <section data-markdown="" data-transition="slide">
+          <script type="text/template">
+				### Shrink Resources 
+				
+				```
+buildTypes {
+	release {
+		shrinkResources true
+		minifyEnabled true
+		proguardFiles
+			getDefaultProguardFile('proguard-android.txt'),
+			'proguard-rules.pro'
+	}
+}
+				```
+</script>
+        </section>
+        
+        <section data-markdown="" data-transition="slide">
+          <script type="text/template">
+### Shrink Resources 
+
+```
+<resources xmlns:tools="http://schemas.android.com/tools"
+
+tools:keep="@layout/l_used*_c,@layout/l_used_a,@layout/l_used_b*"/>
+```
+</script>
+        </section>
+        
         <section>
           <section data-background-image="images/0603.gif" data-transition="slide">
             <h2>Tips su proguard</h2>
@@ -764,7 +794,11 @@ https://developer.android.com/tools/retrace
           
           <section data-markdown="" data-separator="" data-separator-notes="^Notes?:" data-separator-vertical="" data-transition="slide">
             <script type="text/template">
-# consumer-proguard-rules.pro
+## consumer-proguard-rules.pro
+
+```
+consumerProguardFiles ‘consumer-rules.pro’
+```
 </script>
           </section>
           

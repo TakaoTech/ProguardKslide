@@ -118,7 +118,12 @@ fun Presentation.proguardTips() {
 
 			content {
 				"""
-					# consumer-proguard-rules.pro
+					## consumer-proguard-rules.pro
+					
+					```
+					consumerProguardFiles ‘consumer-rules.pro’
+					```
+					
 				""".trimIndent()
 			}
 		}
